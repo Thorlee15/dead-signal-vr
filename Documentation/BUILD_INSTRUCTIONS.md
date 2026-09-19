@@ -3,7 +3,7 @@
 ## Quick Start (5 minutes)
 
 ### Prerequisites
-- Unity 6.3 LTS installed with Android support
+- Unity 6 LTS (verify exact version) installed with Android support
 - Android SDK/NDK (installed via Unity Hub)
 - Meta Quest 3 or 3S connected via USB
 - Developer Mode enabled on headset
@@ -205,63 +205,26 @@ If something doesn't work:
 
 ### Shell Script (Linux/macOS)
 
+Use the checked-in script at `Build/Scripts/build.sh`:
+
 ```bash
-#!/bin/bash
-# build_quest.sh - Automated APK build and deploy
-
-set -e
-
-echo "Building APK for Meta Quest..."
-unity -projectPath . \
-  -executeMethod BuildPipeline.BuildPlayer \
-  -customBuildPath Build/APK/DeadSignal.apk \
-  -buildTarget Android \
-  -quit
-
-echo "APK built successfully."
-echo "Installing on Quest..."
-adb install -r Build/APK/DeadSignal.apk
-
-echo "Launching app..."
-adb shell am start -n com.deadsignal.vr/com.deadsignal.vr.MainActivity
-
-echo "App started. Check headset."
+./Build/Scripts/build.sh
 ```
+
+It invokes the editor entry point below in batch mode. Note that `-executeMethod`
+requires a fully-qualified static method inside an Editor assembly — passing
+`BuildPipeline.BuildPlayer` directly does not work.
 
 ### C# Editor Script
 
-```csharp
-// Assets/Editor/BuildMenu.cs
-using UnityEditor;
-using UnityEditor.SceneManagement;
-using UnityEngine;
+The entry point lives at `Assets/Editor/BuildScript.cs` as
+`DeadSignal.EditorTools.BuildScript.BuildAndroid`. It builds whatever scenes are
+listed in **File → Build Settings** and exits non-zero on failure so CI can detect it.
 
-public class BuildMenu
-{
-    [MenuItem("Build/Build APK for Quest")]
-    public static void BuildAPK()
-    {
-        var scenes = new[] { "Assets/Scenes/RadioRoom.unity" };
-        var outputPath = "Build/APK/DeadSignal.apk";
-        
-        var buildResult = BuildPipeline.BuildPlayer(scenes, outputPath, BuildTarget.Android, BuildOptions.None);
-        
-        if (buildResult.summary.result == BuildResult.Succeeded)
-        {
-            Debug.Log($"Build succeeded: {outputPath}");
-        }
-        else
-        {
-            Debug.LogError($"Build failed: {buildResult.summary.totalErrors} errors");
-        }
-    }
-}
-```
+To use from the Editor: **Build → Build APK for Quest**.
 
-To use:
-1. Save as `Assets/Editor/BuildMenu.cs`
-2. In Editor: **Build → Build APK for Quest**
-3. Automatically deploys to Quest if connected
+Deployment to the headset is a separate `adb install` step — the build script does
+not push to the device.
 
 ## Troubleshooting
 
@@ -346,7 +309,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: game-ci/unity-builder@v4
         with:
-          unityVersion: 2023.2.0f1
+          unityVersion: <your-editor-version>
           targetPlatform: Android
           buildName: DeadSignal
           buildPath: Build/APK

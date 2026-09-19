@@ -36,8 +36,8 @@ namespace DeadSignal.Interactions
             base.OnEnable();
             selectEntered.AddListener(OnSelectEntered);
             selectExited.AddListener(OnSelectExited);
-            interactableHoverEntered.AddListener(OnHoverEntered);
-            interactableHoverExited.AddListener(OnHoverExited);
+            hoverEntered.AddListener(OnHoverEntered);
+            hoverExited.AddListener(OnHoverExited);
         }
 
         protected override void OnDisable()
@@ -45,8 +45,8 @@ namespace DeadSignal.Interactions
             base.OnDisable();
             selectEntered.RemoveListener(OnSelectEntered);
             selectExited.RemoveListener(OnSelectExited);
-            interactableHoverEntered.RemoveListener(OnHoverEntered);
-            interactableHoverExited.RemoveListener(OnHoverExited);
+            hoverEntered.RemoveListener(OnHoverEntered);
+            hoverExited.RemoveListener(OnHoverExited);
         }
 
         private void Start()
@@ -112,10 +112,12 @@ namespace DeadSignal.Interactions
             ResetTint();
         }
 
+        // NOT IMPLEMENTED. Haptics require sending an impulse to the specific
+        // interactor that grabbed this object; the API for that differs between
+        // XRI versions. Implement against the version you install, then remove
+        // this comment. Until then enableHapticFeedback does nothing.
         private void SendHapticFeedback(float intensity, float duration)
         {
-            // Implementation depends on input system
-            // Placeholder for haptic feedback
         }
 
         private void SetHighlight(bool enabled)

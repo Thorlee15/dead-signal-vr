@@ -9,10 +9,8 @@ namespace DeadSignal.Interactions
     /// </summary>
     public class SocketZone : XRSocketInteractor
     {
-        [Header("Socket Settings")]
-        [SerializeField] private float snapRange = 0.2f;
-        [SerializeField] private Vector3 snapAlignment = Vector3.zero;
-        [SerializeField] private bool autoRotateToSocket = true;
+        // Snap range and attach alignment come from XRSocketInteractor's own
+        // collider and attachTransform - do not shadow them with extra fields.
 
         [Header("Feedback")]
         [SerializeField] private bool enableSocketGlow = true;
@@ -105,12 +103,11 @@ namespace DeadSignal.Interactions
             // Optional: play sound when object is removed
         }
 
+        // NOT IMPLEMENTED - see the same stub in GrabbableObject.
         private void SendHapticFeedback(float intensity, float duration)
         {
-            // Placeholder for haptic feedback
         }
 
         public bool HasObject => hasObject;
-        public float SnapRange => snapRange;
     }
 }

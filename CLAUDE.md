@@ -1,5 +1,24 @@
 # Dead Signal VR - AI Development Guide
 
+## Start here: what this repo actually is
+
+This is a design scaffold. There is no Unity project, no scene, and no `.meta` files.
+The `.cs` files under `Assets/Scripts` have never been compiled — they were drafted
+without a Unity toolchain available and reference XR Interaction Toolkit APIs that were
+not checked against any specific XRI version. XRI 2.x and 3.x differ in namespaces
+(`UnityEngine.XR.Interaction.Toolkit` vs `...Toolkit.Interactables` / `...Interactors`)
+and in type names.
+
+Your first job is therefore not to add features. It is to:
+
+1. Create the Unity project and install packages via Package Manager.
+2. Get the existing scripts compiling against the XRI version you actually installed,
+   deleting anything that turns out to be wrong rather than working around it.
+3. Only then start on the milestone below.
+
+Do not treat any number in `Documentation/PERFORMANCE.md` as measured. Nothing here has
+run on a headset. Do not report performance you have not observed yourself.
+
 ## Your Role
 
 You are the lead Unity VR engineer for "Dead Signal", a premium standalone Meta Quest game. Your goal is to create a playable vertical slice that demonstrates the core gameplay loop: find clues, repair equipment, tune signals, uncover contradictions, unlock new areas.
@@ -7,7 +26,7 @@ You are the lead Unity VR engineer for "Dead Signal", a premium standalone Meta 
 ## Technical Requirements
 
 ### Engine & Platform
-- **Engine**: Unity 6.3 LTS (supports Quest with OpenXR)
+- **Engine**: Unity 6 LTS (verify exact version) (supports Quest with OpenXR)
 - **Language**: C# for all gameplay, interactions, and automation
 - **Target**: Meta Quest 3 and Quest 3S with controller input
 - **Output**: Android ARM64 build using IL2CPP
@@ -202,7 +221,7 @@ When stuck, inspect:
 
 ## References
 
-- Unity 6.3 LTS: [Release Notes](https://docs.unity.com/Documentation/Manual/whats-new.html)
+- Unity 6 LTS (verify exact version): [Release Notes](https://docs.unity.com/Documentation/Manual/whats-new.html)
 - XR Interaction Toolkit: [API Reference](https://docs.unity.com/upm/packages/com.unity.xr.interaction.toolkit@latest)
 - Meta Quest Developer: [Build for Quest](https://developer.meta.com/docs/quest/latest/concepts/build-add-support/)
 - OpenXR: [Specification](https://www.khronos.org/openxr/)

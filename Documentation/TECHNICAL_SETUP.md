@@ -14,9 +14,9 @@
 
 ## Installation Checklist
 
-### 1. Unity 6.3 LTS
+### 1. Unity 6 LTS (verify exact version)
 
-Download and install Unity 6.3 LTS via [Unity Hub](https://unity.com/download):
+Download and install Unity 6 LTS (verify exact version) via [Unity Hub](https://unity.com/download):
 
 ```bash
 # Verify installation
@@ -93,7 +93,7 @@ If starting fresh:
 unity -createProject \
   -templatePath "Built-in VR" \
   ./DeadSignalVR \
-  -unityVersion 2023.2.0f1
+  -unityVersion <your-editor-version>
 ```
 
 Or open existing project and add VR support via **Edit → Project Settings → XR Plug-in Management**.
@@ -133,19 +133,15 @@ Or open existing project and add VR support via **Edit → Project Settings → 
 
 Edit `Packages/manifest.json`:
 
-```json
-{
-  "dependencies": {
-    "com.unity.xr.openxr": "1.10.1",
-    "com.unity.xr.interaction.toolkit": "3.0.4",
-    "com.unity.render-pipelines.universal": "14.0.10",
-    "com.meta.xr.sdk": "64.0.0",
-    "com.unity.inputsystem": "1.7.0"
-  }
-}
-```
+Add these through **Window → Package Manager** and let Unity resolve versions for your Editor:
 
-**Important**: Lock these versions once the first build works. Do not auto-update.
+- `com.unity.xr.openxr`
+- `com.unity.xr.interaction.toolkit`
+- `com.unity.render-pipelines.universal`
+- `com.unity.inputsystem`
+- Meta's XR SDK (obtain the current package name and version from Meta's own developer documentation — it has been renamed more than once)
+
+**Do not hand-write version numbers into `manifest.json`.** Install through Package Manager, confirm a build succeeds, then commit the `manifest.json` Unity generated. Lock versions at that point and do not auto-update.
 
 ## Building for Quest
 
@@ -280,7 +276,7 @@ adb install -r Build/APK/DeadSignal.apk
 
 ## Resources
 
-- [Unity 6.3 LTS Release Notes](https://docs.unity.com/upm/packages/com.unity.6@latest)
+- [Unity 6 LTS (verify exact version) Release Notes](https://docs.unity.com/upm/packages/com.unity.6@latest)
 - [XR Interaction Toolkit Documentation](https://docs.unity.com/upm/packages/com.unity.xr.interaction.toolkit@latest)
 - [Meta Quest Developer Documentation](https://developer.meta.com/docs/quest/)
 - [OVR Metrics Tool Guide](https://developer.meta.com/documentation/quest/latest/concepts/pc-ovrmetricstool/)

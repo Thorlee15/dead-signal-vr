@@ -268,11 +268,10 @@ Locked versions (update only after testing):
 
 ```json
 {
-  "com.unity.xr.openxr": "1.10.1",
-  "com.unity.xr.interaction.toolkit": "3.0.4",
-  "com.unity.render-pipelines.universal": "14.0.10",
-  "com.meta.xr.sdk": "64.0.0",
-  "com.unity.inputsystem": "1.7.0"
+  "com.unity.xr.openxr": "<resolved by Package Manager>",
+  "com.unity.xr.interaction.toolkit": "<resolved by Package Manager>",
+  "com.unity.render-pipelines.universal": "<resolved by Package Manager>",
+  "com.unity.inputsystem": "<resolved by Package Manager>"
 }
 ```
 
