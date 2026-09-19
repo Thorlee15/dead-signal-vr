@@ -1,0 +1,48 @@
+# Unity
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+*.log
+*.avi
+*.mov
+*.mp4
+
+# IDE
+.vscode/
+.idea/
+.vs/
+*.swp
+*.swo
+*~
+*.user
+*.userprefs
+*.csproj
+*.sln
+*.pidb
+.DS_Store
+
+# Build artifacts
+*.apk
+*.aab
+*.abb
+*.ipa
+*.exe
+*.dll
+*.dylib
+.so
+
+# Local development
+local_settings.json
+.env
+credentials.json
+signing_key.keystore
+build_secrets/
+
+# Temp
+*.tmp
+*.temp
+scratch/
